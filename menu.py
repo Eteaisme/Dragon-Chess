@@ -50,7 +50,7 @@ def play():
 
         # Clear screen and draw the chessboard
         screen.fill("white")
-        Board.draw_board(screen)
+        Board.board()
 
         pygame.display.update()
 
