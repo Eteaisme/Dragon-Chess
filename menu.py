@@ -1,17 +1,18 @@
 import pygame, sys
 from button import Button
 from board import Board
+from game import gameloop
 
 # Initialize Pygame
 pygame.init()
 
 # Screen setup
-screen = pygame.display.set_mode((1280, 720))
+screen = pygame.display.set_mode((750, 600))
 pygame.display.set_caption("Chess Game")
 
 # Load background image
 BG = pygame.image.load("images/Background.png")
-BG = pygame.transform.scale(BG, (1280, 720))
+BG = pygame.transform.scale(BG, (750, 600))
 
 # Fonts
 def font(size, font_name="Arial"):
@@ -24,7 +25,7 @@ def options():
         mouse_pos = pygame.mouse.get_pos()
 
         # Back button
-        back_button = Button(image=None, pos=(640, 460), text_input="BACK", font=font(75), base_color="White", hovering_color="Green")
+        back_button = Button(image=None, pos=(375, 300), text_input="BACK", font=font(50), base_color="White", hovering_color="Green")
 
         back_button.changeColor(mouse_pos)
         back_button.update(screen)
@@ -42,17 +43,7 @@ def options():
 
 # Play function to start the chess game
 def play():
-    while True:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-
-        # Clear screen and draw the chessboard
-        screen.fill("white")
-        Board.draw_board(screen)
-
-        pygame.display.update()
+    gameloop()
 
 # Menu function
 def menu():
@@ -63,14 +54,14 @@ def menu():
         mouse_pos = pygame.mouse.get_pos()
 
         # Title
-        menu_text = font(100).render("MAIN MENU", True, "#b68f40")
-        menu_rect = menu_text.get_rect(center=(640, 100))
+        menu_text = font(75).render("MAIN MENU", True, "#b68f40")
+        menu_rect = menu_text.get_rect(center=(375, 100))
         screen.blit(menu_text, menu_rect)
 
         # Buttons
-        play_button = Button(image=pygame.image.load("images/Play.png"), pos=(640, 250), text_input="PLAY", font=font(75), base_color="#d7fcd4", hovering_color="White")
-        options_button = Button(image=pygame.image.load("images/Options.png"), pos=(640, 400), text_input="OPTIONS", font=font(75), base_color="#d7fcd4", hovering_color="White")
-        quit_button = Button(image=pygame.image.load("images/Quit.png"), pos=(640, 550), text_input="QUIT", font=font(75), base_color="#d7fcd4", hovering_color="White")
+        play_button = Button(image=pygame.image.load("images/Play.png"), pos=(375, 250), text_input="PLAY", font=font(75), base_color="#d7fcd4", hovering_color="White")
+        options_button = Button(image=pygame.image.load("images/Options.png"), pos=(375, 400), text_input="OPTIONS", font=font(75), base_color="#d7fcd4", hovering_color="White")
+        quit_button = Button(image=pygame.image.load("images/Quit.png"), pos=(375, 550), text_input="QUIT", font=font(75), base_color="#d7fcd4", hovering_color="White")
         
         # Update buttons
         for button in [play_button, options_button, quit_button]:
